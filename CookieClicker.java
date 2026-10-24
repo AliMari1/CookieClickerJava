@@ -18,8 +18,6 @@ public class CookieClicker {
     ImageIcon cookie = new ImageIcon("DaCookie.jpg");
 
     // Buttons
-    JButton startButton = new JButton("Start");
-    JButton mainMenuButton = new JButton("Main Menu");
     JButton shopButton = new JButton("Shop #1");
     JButton pauseButton = new JButton("Pause");
     JButton shopTwoButton = new JButton("Shop #2");
@@ -30,7 +28,7 @@ public class CookieClicker {
     JButton autoClickerButton = new JButton("Auto Clicker");
 
     // Labels
-    JLabel mainMenu = new JLabel("Cookie Clicker");
+    JLabel cookieLabel = new JLabel("Cookie Clicker");
     JLabel points = new JLabel("Cookies: " + cookieCount);
     JLabel gameOverScreen = new JLabel("You Beat The Game... Congrats!!!");
     JLabel goldCoins = new JLabel("Coins: 0");
@@ -46,6 +44,8 @@ public class CookieClicker {
         setUpLabels();
         updateCookies();
         updateGoldCoins();
+        resetGame();
+        shopOne();
         frame.setVisible(true);
     }
 
@@ -85,17 +85,14 @@ public class CookieClicker {
         frame.add(restart);
 
         // Future menu buttons
-        mainMenuButton.setBounds(300, 250, 200, 50);
-
-        startButton.setBounds(300, 320, 200, 60);
 
         continueGameButton.setBounds(300, 400, 200, 60);
     }
 
     public void setUpLabels() {
 
-        mainMenu.setFont(new Font("Arial", Font.BOLD, 22));
-        mainMenu.setBounds(320, 60, 200, 40);
+        cookieLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        cookieLabel.setBounds(320, 60, 200, 40);
 
         points.setFont(new Font("Arial", Font.BOLD, 18));
         points.setBounds(20, 20, 200, 30);
@@ -103,7 +100,7 @@ public class CookieClicker {
         goldCoins.setFont(new Font("Arial", Font.BOLD, 18));
         goldCoins.setBounds(620, 20, 150, 30);
 
-        frame.add(mainMenu);
+        frame.add(cookieLabel);
         frame.add(points);
         frame.add(goldCoins);
     }
@@ -136,6 +133,35 @@ public class CookieClicker {
                 }
             }
             
+        });
+    }
+
+
+    public void resetGame(){ // resetGame function
+        restart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cookieCount = 0; // cookie count reset
+                goldCoinCount = 0; // gold coin count reset
+                points.setText("Cookies: " + cookieCount);
+                goldCoins.setText("Coins: " + goldCoinCount);
+            }
+        });
+    }
+
+    public void shopOne() {
+        shopButton.addActionListener(new ActionListener() {
+            @Override 
+            public void actionPerformed(ActionEvent e) {
+                cookieClickerButton.setVisible(false);
+                shopButton.setVisible(false);
+                shopTwoButton.setVisible(false);
+                sell.setVisible(false);
+                autoClickerButton.setVisible(false);
+                pauseButton.setVisible(false);
+                restart.setVisible(false);
+                cookieLabel.setVisible(true);
+            }
         });
     }
 }
