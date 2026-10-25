@@ -36,6 +36,7 @@ public class CookieClicker {
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
+        CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
     }
 
     public void setup() {
