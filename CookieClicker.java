@@ -1,7 +1,3 @@
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
@@ -11,8 +7,11 @@ public class CookieClicker {
 
     JFrame frame = new JFrame("Cookie Clicker Game");
 
+    CookieClickerShopOne shopOneScreen = new CookieClickerShopOne();
+
     int cookieCount = 0;
     int goldCoinCount = 0;
+    int clickMultiplier = 1;
 
     // Image
     ImageIcon cookie = new ImageIcon("DaCookie.jpg");
@@ -36,10 +35,13 @@ public class CookieClicker {
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
-        CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
+        //CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
     }
 
     public void setup() {
+
+        shopOneScreen.frame = frame;
+
         setUpFrame();
         setUpButtons();
         setUpLabels();
@@ -48,6 +50,7 @@ public class CookieClicker {
         resetGame();
         shopOne();
         frame.setVisible(true);
+
     }
 
     public void setUpFrame() {
@@ -112,7 +115,7 @@ public class CookieClicker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                cookieCount++;
+                cookieCount += clickMultiplier;
 
                 points.setText("Cookies: " + cookieCount);
             }
@@ -162,6 +165,8 @@ public class CookieClicker {
                 pauseButton.setVisible(false);
                 restart.setVisible(false);
                 cookieLabel.setVisible(true);
+
+                shopOneScreen.setUpShopButtons();
             }
         });
     }
