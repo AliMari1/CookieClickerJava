@@ -170,6 +170,7 @@ public class CookieClicker {
                 cookieLabel.setVisible(true);
 
                 shopOneScreen.setUpShopButtons();
+                shopOneScreen.shopOneLabels();
             }
         });
     }
