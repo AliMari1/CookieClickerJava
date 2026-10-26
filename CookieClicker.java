@@ -7,11 +7,11 @@ public class CookieClicker {
 
     JFrame frame = new JFrame("Cookie Clicker Game");
 
-    CookieClickerShopOne shopOneScreen = new CookieClickerShopOne();
+    CookieClickerShopOne shopOneScreen;
 
     int cookieCount = 0;
     int goldCoinCount = 0;
-    int clickMultiplier = 1;
+    public int clickMultiplier = 1;
 
     // Image
     ImageIcon cookie = new ImageIcon("DaCookie.jpg");
@@ -40,6 +40,8 @@ public class CookieClicker {
 
     public void setup() {
 
+        shopOneScreen = new CookieClickerShopOne(this);
+
         shopOneScreen.frame = frame;
 
         setUpFrame();
@@ -49,6 +51,7 @@ public class CookieClicker {
         updateGoldCoins();
         resetGame();
         shopOne();
+        shopOneScreen.back();
         frame.setVisible(true);
 
     }
