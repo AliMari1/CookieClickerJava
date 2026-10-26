@@ -85,11 +85,11 @@ public class CookieClickerShopTwo {
         });
     }
 
-    public void cookieMultiplierButtons() { // Buttons that each have their own multiplier
+    public void cookiePlusButtons() { // Buttons that each have their own multiplier
         AutoClickerX2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickMultiplier *= 2;
+                CookieGame.clickPlus *= 2;
             }
         });
     }

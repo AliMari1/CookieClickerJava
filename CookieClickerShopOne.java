@@ -16,11 +16,11 @@ public class CookieClickerShopOne {
 
     // Shop one buttons
     // multiplier buttons
-    JButton X2Multiplier = new JButton("2X Multiplier");
-    JButton X5Multiplier = new JButton("5X Multiplier");
-    JButton X10Multiplier = new JButton("10X Multiplier");
-    JButton X20Multiplier = new JButton("20X Multiplier");
-    JButton X50Multiplier = new JButton("50X Multiplier");
+    JButton plus2Button = new JButton("+2 cookies ($100)");
+    JButton plus5Button = new JButton("+5 cookies");
+    JButton plus10Button = new JButton("+10 cookies");
+    JButton plus20Button = new JButton("+20 cookies");
+    JButton plus50Button = new JButton("+50 cookies");
 
     // auto click buttons
     JButton auto1 = new JButton("Auto 1");
@@ -29,7 +29,7 @@ public class CookieClickerShopOne {
     JButton auto4 = new JButton("Auto 4");
     JButton auto5 = new JButton("Auto 5");
 
-    // click boosts
+    // click boosts // temporary multipliers
     JButton clickBoost1 = new JButton("+1 Click");
     JButton clickBoost2 = new JButton("+5 Click");
     JButton clickBoost3 = new JButton("+10 Click");
@@ -52,7 +52,7 @@ public class CookieClickerShopOne {
 
     JButton backButton = new JButton("Back");
 
-    JLabel multiplierLabel = new JLabel("Multipliers");
+    JLabel moreCookiesLabel = new JLabel("More Cookies");
     JLabel autoLabel = new JLabel("Auto Clickers");
     JLabel boostLabel = new JLabel("Click Boosts");
     JLabel buffLabel = new JLabel("Buffs");
@@ -61,19 +61,19 @@ public class CookieClickerShopOne {
     // add labels above buttons for price of powerups
 
     public void shopOneLabels() {
-        multiplierLabel.setBounds(20, 100, 120, 30);
+        moreCookiesLabel.setBounds(20, 100, 120, 30);
         autoLabel.setBounds(170, 100, 120, 30);
         boostLabel.setBounds(320, 100, 120, 30);
         buffLabel.setBounds(470, 100, 120, 30);
         specialLabel.setBounds(620, 100, 120, 30);
 
-        frame.add(multiplierLabel);
+        frame.add(moreCookiesLabel);
         frame.add(autoLabel);
         frame.add(boostLabel);
         frame.add(buffLabel);
         frame.add(specialLabel);
 
-        multiplierLabel.setVisible(true);
+        moreCookiesLabel.setVisible(true);
         autoLabel.setVisible(true);
         boostLabel.setVisible(true);
         buffLabel.setVisible(true);
@@ -85,27 +85,27 @@ public class CookieClickerShopOne {
     public void setUpShopButtons() { // shop buttons function
 
         // multiplier buttons
-        X2Multiplier.setBounds(20, 150, 120, 50);
-        X5Multiplier.setBounds(20, 250, 120, 50);
-        X10Multiplier.setBounds(20, 350, 120, 50);
-        X20Multiplier.setBounds(20, 450, 120, 50);
-        X50Multiplier.setBounds(20, 550, 120, 50);
+        plus2Button.setBounds(20, 150, 120, 50);
+        plus5Button.setBounds(20, 250, 120, 50);
+        plus10Button.setBounds(20, 350, 120, 50);
+        plus20Button.setBounds(20, 450, 120, 50);
+        plus50Button.setBounds(20, 550, 120, 50);
 
         backButton.setBounds(20, 700, 100, 40); // back button
 
         // add multiplier buttons and back button
-        frame.add(X2Multiplier);
-        frame.add(X5Multiplier);
-        frame.add(X10Multiplier);
-        frame.add(X20Multiplier);
-        frame.add(X50Multiplier);
+        frame.add(plus2Button);
+        frame.add(plus5Button);
+        frame.add(plus10Button);
+        frame.add(plus20Button);
+        frame.add(plus50Button);
         frame.add(backButton);
 
-        X2Multiplier.setVisible(true);
-        X5Multiplier.setVisible(true);
-        X10Multiplier.setVisible(true);
-        X20Multiplier.setVisible(true);
-        X50Multiplier.setVisible(true);
+        plus2Button.setVisible(true);
+        plus5Button.setVisible(true);
+        plus10Button.setVisible(true);
+        plus20Button.setVisible(true);
+        plus50Button.setVisible(true);
 
         backButton.setVisible(true);
 
@@ -131,14 +131,14 @@ public class CookieClickerShopOne {
                 CookieGame.autoClickerButton.setVisible(true);
 
                 // Shop One Buttons visibility set to false
-                X2Multiplier.setVisible(false);
-                X5Multiplier.setVisible(false);
-                X10Multiplier.setVisible(false);
-                X20Multiplier.setVisible(false);
-                X50Multiplier.setVisible(false);
+                plus2Button.setVisible(false);
+                plus5Button.setVisible(false);
+                plus10Button.setVisible(false);
+                plus20Button.setVisible(false);
+                plus50Button.setVisible(false);
 
                 // Shop one labels visibility set to false
-                multiplierLabel.setVisible(false);
+                moreCookiesLabel.setVisible(false);
                 autoLabel.setVisible(false);
                 boostLabel.setVisible(false);
                 buffLabel.setVisible(false);
@@ -152,12 +152,68 @@ public class CookieClickerShopOne {
         });
     }
 
-    public void cookieMultiplierButtons() { // Buttons that each have their own multiplier
-        X2Multiplier.addActionListener(new ActionListener() {
+    public void addCookiePlus2() { // Buttons that each have their own multiplier
+        plus2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickMultiplier *= 2;
+                CookieGame.clickPlus += 1;
+                // make plus2buttton change name and make it unusable
+                plus2Button.setText("Purchased");
+                plus2Button.setEnabled(false);
+
             }
         });
     }
+
+    public void addCookiePlus5() { // Buttons that each have their own multiplier
+        plus5Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CookieGame.clickPlus += 4;
+                // make plus2buttton change name and make it unusable
+                plus5Button.setText("Purchased");
+                plus5Button.setEnabled(false);
+            }
+        });
+
+}
+
+public void addCookiePlus10() { // Buttons that each have their own multiplier
+        plus10Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CookieGame.clickPlus += 9;
+                // make plus2buttton change name and make it unusable
+                plus10Button.setText("Purchased");
+                plus10Button.setEnabled(false);
+            }
+        });
+
+}
+
+public void addCookiePlus20() { // Buttons that each have their own multiplier
+        plus20Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CookieGame.clickPlus += 19;
+                // make plus2buttton change name and make it unusable
+                plus20Button.setText("Purchased");
+                plus20Button.setEnabled(false);
+            }
+        });
+
+}
+
+public void addCookiePlus50() { // Buttons that each have their own multiplier
+        plus50Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CookieGame.clickPlus += 49;
+                // make plus2buttton change name and make it unusable
+                plus50Button.setText("Purchased");
+                plus50Button.setEnabled(false);
+            }
+        });
+
+}
 }

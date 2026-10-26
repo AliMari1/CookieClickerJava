@@ -11,7 +11,7 @@ public class CookieClicker {
 
     int cookieCount = 0;
     int goldCoinCount = 0;
-    public int clickMultiplier = 1;
+    public int clickPlus = 1;
 
     // Image
     ImageIcon cookie = new ImageIcon("DaCookie.jpg");
@@ -35,7 +35,7 @@ public class CookieClicker {
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
-        //CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
+        // CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
     }
 
     public void setup() {
@@ -52,6 +52,13 @@ public class CookieClicker {
         resetGame();
         shopOne();
         shopOneScreen.back();
+
+        shopOneScreen.addCookiePlus2();
+        shopOneScreen.addCookiePlus5();
+        shopOneScreen.addCookiePlus10();
+        shopOneScreen.addCookiePlus20();
+        shopOneScreen.addCookiePlus50();
+
         frame.setVisible(true);
 
     }
@@ -118,17 +125,17 @@ public class CookieClicker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                cookieCount += clickMultiplier;
+                cookieCount += clickPlus;
 
                 points.setText("Cookies: " + cookieCount);
             }
         });
     }
 
-    public void updateGoldCoins(){
+    public void updateGoldCoins() {
         goldCoins.setText("Coins: " + goldCoinCount);
         sell.addActionListener(new ActionListener() {
-            @Override 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (cookieCount >= 1) {
                     goldCoinCount += cookieCount;
@@ -139,26 +146,30 @@ public class CookieClicker {
                     JOptionPane.showMessageDialog(frame, "Not enough cookies to sell! Get more cookies");
                 }
             }
-            
+
         });
     }
 
-
-    public void resetGame(){ // resetGame function
+    public void resetGame() { // resetGame function
         restart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cookieCount = 0; // cookie count reset
                 goldCoinCount = 0; // gold coin count reset
+                clickPlus = 1;
                 points.setText("Cookies: " + cookieCount);
                 goldCoins.setText("Coins: " + goldCoinCount);
+                // GAME RESET ANNOUNCEMENT IN FUTURE
+                shopOneScreen.plus2Button.setEnabled(true);
+                shopOneScreen.plus2Button.setText("+2 cookies ($100)");
+
             }
         });
     }
 
     public void shopOne() {
         shopButton.addActionListener(new ActionListener() {
-            @Override 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 cookieClickerButton.setVisible(false);
                 shopButton.setVisible(false);
@@ -168,9 +179,9 @@ public class CookieClicker {
                 pauseButton.setVisible(false);
                 restart.setVisible(false);
                 cookieLabel.setVisible(true);
-
                 shopOneScreen.setUpShopButtons();
                 shopOneScreen.shopOneLabels();
+
             }
         });
     }
