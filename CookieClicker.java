@@ -59,6 +59,8 @@ public class CookieClicker {
         shopOneScreen.addCookiePlus20();
         shopOneScreen.addCookiePlus50();
 
+        shopOneScreen.autoClicker1();
+
         frame.setVisible(true);
 
     }
@@ -142,6 +144,7 @@ public class CookieClicker {
                     cookieCount = 0;
                     points.setText("Cookies: " + cookieCount);
                     goldCoins.setText("Coins: " + goldCoinCount);
+
                 } else {
                     JOptionPane.showMessageDialog(frame, "Not enough cookies to sell! Get more cookies");
                 }
@@ -161,7 +164,14 @@ public class CookieClicker {
                 goldCoins.setText("Coins: " + goldCoinCount);
                 // GAME RESET ANNOUNCEMENT IN FUTURE
                 shopOneScreen.plus2Button.setEnabled(true);
-                shopOneScreen.plus2Button.setText("+2 cookies ($100)");
+                shopOneScreen.plus2Button.setText("+2 cookies ($10)");
+
+                if (shopOneScreen.timer != null) {
+                    shopOneScreen.timer.stop();
+                }
+
+                shopOneScreen.auto1.setEnabled(true);
+                shopOneScreen.auto1.setText("Auto 1  ($100k)");
 
             }
         });

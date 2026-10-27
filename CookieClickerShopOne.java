@@ -1,7 +1,8 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,39 +17,39 @@ public class CookieClickerShopOne {
 
     // Shop one buttons
     // multiplier buttons
-    JButton plus2Button = new JButton("+2 cookies ($100)");
-    JButton plus5Button = new JButton("+5 cookies");
-    JButton plus10Button = new JButton("+10 cookies");
-    JButton plus20Button = new JButton("+20 cookies");
-    JButton plus50Button = new JButton("+50 cookies");
+    JButton plus2Button = new JButton("+2  ($100)");
+    JButton plus5Button = new JButton("+5  ($1K)");
+    JButton plus10Button = new JButton("+10  ($10K)");
+    JButton plus20Button = new JButton("+20  ($100K)");
+    JButton plus50Button = new JButton("+50  ($1M)");
 
     // auto click buttons
-    JButton auto1 = new JButton("Auto 1");
-    JButton auto2 = new JButton("Auto 2");
-    JButton auto3 = new JButton("Auto 3");
-    JButton auto4 = new JButton("Auto 4");
-    JButton auto5 = new JButton("Auto 5");
+    JButton auto1 = new JButton("Auto 1  ($100k)");
+    JButton auto2 = new JButton("Auto 2  ($500k)");
+    JButton auto3 = new JButton("Auto 3  ($1M)");
+    JButton auto4 = new JButton("Auto 4  ($5M)");
+    JButton auto5 = new JButton("Auto 5  ($10M)");
 
     // click boosts // temporary multipliers
-    JButton clickBoost1 = new JButton("+1 Click");
-    JButton clickBoost2 = new JButton("+5 Click");
-    JButton clickBoost3 = new JButton("+10 Click");
-    JButton clickBoost4 = new JButton("+25 Click");
-    JButton clickBoost5 = new JButton("+50 Click");
+    JButton clickBoost1 = new JButton("x2  ($1M)");
+    JButton clickBoost2 = new JButton("x5  ($10M)");
+    JButton clickBoost3 = new JButton("x10  ($100M)");
+    JButton clickBoost4 = new JButton("x25  ($500M)");
+    JButton clickBoost5 = new JButton("x50  ($1B)");
 
     // Buffs
-    JButton frenzy = new JButton("Frenzy");
-    JButton mega = new JButton("Mega");
-    JButton lucky = new JButton("Lucky");
-    JButton Warp = new JButton("Warp");
-    JButton Rain = new JButton("Rain");
+    JButton frenzy = new JButton("Frenzy  ($1B)");
+    JButton mega = new JButton("Mega  ($5B)");
+    JButton lucky = new JButton("Lucky  ($10B)");
+    JButton Warp = new JButton("Warp  ($100B)");
+    JButton Rain = new JButton("Rain  ($500B)");
 
     // specials
-    JButton grandma = new JButton("Grandma");
-    JButton farm = new JButton("Farm");
-    JButton Mine = new JButton("Mine");
-    JButton bank = new JButton("Bank");
-    JButton empire = new JButton("Empire");
+    JButton grandma = new JButton("Grandma  ($1T)");
+    JButton farm = new JButton("Farm  ($5T)");
+    JButton Mine = new JButton("Mine  ($10T)");
+    JButton bank = new JButton("Bank  ($100T)");
+    JButton empire = new JButton("Empire  ($500T)");
 
     JButton backButton = new JButton("Back");
 
@@ -57,6 +58,11 @@ public class CookieClickerShopOne {
     JLabel boostLabel = new JLabel("Click Boosts");
     JLabel buffLabel = new JLabel("Buffs");
     JLabel specialLabel = new JLabel("Specials");
+
+    JLabel multiplierLabel = new JLabel();
+
+    // Timer
+    public Timer timer;
 
     // add labels above buttons for price of powerups
 
@@ -107,6 +113,25 @@ public class CookieClickerShopOne {
         plus20Button.setVisible(true);
         plus50Button.setVisible(true);
 
+        // Auto Clickers
+        auto1.setBounds(170, 150, 120, 50);
+        auto2.setBounds(170, 250, 120, 50);
+        auto3.setBounds(170, 350, 120, 50);
+        auto4.setBounds(170, 450, 120, 50);
+        auto5.setBounds(170, 550, 120, 50);
+
+        frame.add(auto1);
+        frame.add(auto2);
+        frame.add(auto3);
+        frame.add(auto4);
+        frame.add(auto5);
+
+        auto1.setVisible(true);
+        auto2.setVisible(true);
+        auto3.setVisible(true);
+        auto4.setVisible(true);
+        auto5.setVisible(true);
+
         backButton.setVisible(true);
 
         frame.repaint(); /*
@@ -144,76 +169,148 @@ public class CookieClickerShopOne {
                 buffLabel.setVisible(false);
                 specialLabel.setVisible(false);
 
+                auto1.setVisible(false);
+                auto2.setVisible(false);
+                auto3.setVisible(false);
+                auto4.setVisible(false);
+                auto5.setVisible(false);
+
                 backButton.setVisible(false);
 
-                // works only once need to update
                 frame.repaint();
             }
         });
     }
 
-    public void addCookiePlus2() { // Buttons that each have their own multiplier
+    public void addCookiePlus2() {
         plus2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickPlus += 1;
-                // make plus2buttton change name and make it unusable
-                plus2Button.setText("Purchased");
-                plus2Button.setEnabled(false);
+                if (CookieGame.goldCoinCount >= 10) {
+                    CookieGame.clickPlus += 1;
+                    plus2Button.setText("Purchased");
+                    plus2Button.setEnabled(false);
+                    CookieGame.goldCoinCount -= 10;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                }
 
             }
         });
     }
 
-    public void addCookiePlus5() { // Buttons that each have their own multiplier
+    public void addCookiePlus5() {
         plus5Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickPlus += 4;
-                // make plus2buttton change name and make it unusable
-                plus5Button.setText("Purchased");
-                plus5Button.setEnabled(false);
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 50) {
+                    CookieGame.clickPlus += 4;
+                    plus5Button.setText("Purchased");
+                    plus5Button.setEnabled(false);
+                    CookieGame.goldCoinCount -= 50;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                }
+
             }
         });
+    }
 
-}
-
-public void addCookiePlus10() { // Buttons that each have their own multiplier
+    public void addCookiePlus10() {
         plus10Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickPlus += 9;
-                // make plus2buttton change name and make it unusable
-                plus10Button.setText("Purchased");
-                plus10Button.setEnabled(false);
+
+                if (CookieGame.goldCoinCount >= 100) {
+                    CookieGame.clickPlus += 9;
+                    plus10Button.setText("Purchased");
+                    plus10Button.setEnabled(false);
+                    CookieGame.goldCoinCount -= 100;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                }
+
             }
         });
+    }
 
-}
-
-public void addCookiePlus20() { // Buttons that each have their own multiplier
+    public void addCookiePlus20() { // Buttons that each have their own multiplier
         plus20Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickPlus += 19;
-                // make plus2buttton change name and make it unusable
-                plus20Button.setText("Purchased");
-                plus20Button.setEnabled(false);
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 300) {
+                    CookieGame.clickPlus += 19;
+                    // make plus2buttton change name and make it unusable
+                    plus20Button.setText("Purchased");
+                    plus20Button.setEnabled(false);
+                    CookieGame.goldCoinCount -= 300;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                }
+
             }
         });
+    }
 
-}
-
-public void addCookiePlus50() { // Buttons that each have their own multiplier
+    public void addCookiePlus50() { // Buttons that each have their own multiplier
         plus50Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CookieGame.clickPlus += 49;
-                // make plus2buttton change name and make it unusable
-                plus50Button.setText("Purchased");
-                plus50Button.setEnabled(false);
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 500) {
+                    CookieGame.clickPlus += 49;
+                    // make plus2buttton change name and make it unusable
+                    plus50Button.setText("Purchased");
+                    plus50Button.setEnabled(false);
+                    CookieGame.goldCoinCount -= 500;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!!");
+                }
+
             }
         });
+    }
 
-}
+
+
+    // auto clicker setup
+  //  public void autoClick1Setup() {
+    //    this.CookieGame.cookieClickerButton;
+    //}
+    // Auto Clicker function
+    public void autoClicker1() { // Buttons that each have their own multiplier
+        auto1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 10) {
+                    //CookieGame.clickPlus += 49;
+                    // make plus2buttton change name and make it unusable
+                    auto1.setText("Purchased");
+                    auto1.setEnabled(false);
+                    CookieGame.goldCoinCount -= 10;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                   // autoClick1Setup();
+                   timer = new Timer(1000, new ActionListener() {
+                    @Override 
+                    public void actionPerformed(ActionEvent e) {
+                        CookieGame.cookieClickerButton.doClick();
+                    }
+                   });
+
+                   timer.start();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!!");
+                }
+
+            }
+        });
+    }
 }
