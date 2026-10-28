@@ -14,7 +14,8 @@ public class CookieClicker {
     public int clickPlus = 1;
 
     // Image
-    ImageIcon cookie = new ImageIcon("DaCookie.jpg");
+    ImageIcon cookie = new ImageIcon("DaCookie.png");
+    ImageIcon goldCoinImage = new ImageIcon("GoldCoinImage.png");
 
     // Buttons
     JButton shopButton = new JButton("Shop #1");
@@ -30,12 +31,13 @@ public class CookieClicker {
     JLabel cookieLabel = new JLabel("Cookie Clicker");
     JLabel points = new JLabel("Cookies: " + cookieCount);
     JLabel gameOverScreen = new JLabel("You Beat The Game... Congrats!!!");
-    JLabel goldCoins = new JLabel("Coins: 0");
+    JLabel goldCoins = new JLabel("");
+    JLabel goldCoinIconLabel = new JLabel();
 
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
-        // CookieClickerShopOne shopNumOne = new CookieClickerShopOne();
+        
     }
 
     public void setup() {
@@ -60,6 +62,10 @@ public class CookieClicker {
         shopOneScreen.addCookiePlus50();
 
         shopOneScreen.autoClicker1();
+        shopOneScreen.autoClicker2();
+        shopOneScreen.autoClicker3();
+        shopOneScreen.autoClicker4();
+        shopOneScreen.autoClicker5();
 
         frame.setVisible(true);
 
@@ -103,6 +109,14 @@ public class CookieClicker {
         // Future menu buttons
 
         continueGameButton.setBounds(300, 400, 200, 60);
+
+
+        // Brisket cooker game IDEA 
+        // make cookie button invisible
+        cookieClickerButton.setOpaque(false);
+        cookieClickerButton.setContentAreaFilled(false);
+        cookieClickerButton.setBorderPainted(false);
+        cookieClickerButton.setFocusPainted(false);
     }
 
     public void setUpLabels() {
@@ -115,6 +129,19 @@ public class CookieClicker {
 
         goldCoins.setFont(new Font("Arial", Font.BOLD, 18));
         goldCoins.setBounds(620, 20, 150, 30);
+
+        // GCI stands for gold coin image
+        Image GCI = goldCoinImage.getImage();
+        Image scaledImg = GCI.getScaledInstance(30,30, Image.SCALE_SMOOTH);
+
+        goldCoins.setIcon(new ImageIcon(scaledImg));
+        goldCoins.setText(" Coins: " + goldCoinCount);
+
+        // DCI stands for DaCookie Image
+        Image DCI = cookie.getImage();
+        Image cookieImg = DCI.getScaledInstance(300,300, Image.SCALE_SMOOTH);
+
+        cookieClickerButton.setIcon(new ImageIcon(cookieImg));
 
         frame.add(cookieLabel);
         frame.add(points);
@@ -135,7 +162,7 @@ public class CookieClicker {
     }
 
     public void updateGoldCoins() {
-        goldCoins.setText("Coins: " + goldCoinCount);
+        goldCoins.setText(" Coins: " + goldCoinCount);
         sell.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,7 +170,7 @@ public class CookieClicker {
                     goldCoinCount += cookieCount;
                     cookieCount = 0;
                     points.setText("Cookies: " + cookieCount);
-                    goldCoins.setText("Coins: " + goldCoinCount);
+                    goldCoins.setText(" Coins: " + goldCoinCount);
 
                 } else {
                     JOptionPane.showMessageDialog(frame, "Not enough cookies to sell! Get more cookies");
