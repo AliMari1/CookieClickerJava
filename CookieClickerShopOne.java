@@ -64,6 +64,8 @@ public class CookieClickerShopOne {
     // Timer
     public Timer timer;
 
+    public int howMuchMoreCoins = 0;
+
     // add labels above buttons for price of powerups
 
     public void shopOneLabels() {
@@ -193,7 +195,8 @@ public class CookieClickerShopOne {
                     CookieGame.goldCoinCount -= 10;
                     CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                    howMuchMoreCoins = 10 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
@@ -212,7 +215,8 @@ public class CookieClickerShopOne {
                     CookieGame.goldCoinCount -= 50;
                     CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                    howMuchMoreCoins = 50 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
@@ -231,7 +235,8 @@ public class CookieClickerShopOne {
                     CookieGame.goldCoinCount -= 100;
                     CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                    howMuchMoreCoins = 100 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
@@ -251,7 +256,8 @@ public class CookieClickerShopOne {
                     CookieGame.goldCoinCount -= 300;
                     CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!");
+                    howMuchMoreCoins = 300 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
@@ -271,7 +277,8 @@ public class CookieClickerShopOne {
                     CookieGame.goldCoinCount -= 500;
                     CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!!");
+                    howMuchMoreCoins = 500 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
@@ -307,10 +314,150 @@ public class CookieClickerShopOne {
 
                    timer.start();
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!!");
+                    howMuchMoreCoins = 10 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
                 }
 
             }
         });
     }
+
+
+
+    public void autoClicker2() { // Buttons that each have their own multiplier
+        auto2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 100) {
+                    
+                    // make plus2buttton change name and make it unusable
+                    auto2.setText("Purchased");
+                    auto2.setEnabled(false);
+                    CookieGame.goldCoinCount -= 100;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                   // autoClick1Setup();
+                   timer = new Timer(500, new ActionListener() {
+                    @Override 
+                    public void actionPerformed(ActionEvent e) {
+                        CookieGame.cookieClickerButton.doClick();
+                    }
+                   });
+
+                   timer.start();
+                } else {
+                    howMuchMoreCoins = 100 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
+                }
+
+            }
+        });
+    }
+
+
+
+
+    public void autoClicker3() { // Buttons that each have their own multiplier
+        auto3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 1000) {
+                    //CookieGame.clickPlus += 49;
+                    // make plus2buttton change name and make it unusable
+                    auto3.setText("Purchased");
+                    auto3.setEnabled(false);
+                    CookieGame.goldCoinCount -= 1000;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                   // autoClick1Setup();
+                   timer = new Timer(250, new ActionListener() {
+                    @Override 
+                    public void actionPerformed(ActionEvent e) {
+                        CookieGame.cookieClickerButton.doClick();
+                    }
+                   });
+
+                   timer.start();
+                } else {
+                    howMuchMoreCoins = 1000 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
+                }
+
+            }
+        });
+    }
+
+
+
+
+
+    public void autoClicker4() { // Buttons that each have their own multiplier
+        auto4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 1250) {
+                    //CookieGame.clickPlus += 49;
+                    // make plus2buttton change name and make it unusable
+                    auto4.setText("Purchased");
+                    auto4.setEnabled(false);
+                    CookieGame.goldCoinCount -= 1250;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                   // autoClick1Setup();
+                   timer = new Timer(200, new ActionListener() {
+                    @Override 
+                    public void actionPerformed(ActionEvent e) {
+                        CookieGame.cookieClickerButton.doClick();
+                    }
+                   });
+
+                   timer.start();
+                } else {
+                    howMuchMoreCoins = 1250 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
+                }
+
+            }
+        });
+    }
+
+
+
+
+
+    public void autoClicker5() { // Buttons that each have their own multiplier
+        auto5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LEFT OFF HERE COME BACKKKKK
+                if (CookieGame.goldCoinCount >= 2500) {
+                    //CookieGame.clickPlus += 49;
+                    // make plus2buttton change name and make it unusable
+                    auto5.setText("Purchased");
+                    auto5.setEnabled(false);
+                    CookieGame.goldCoinCount -= 2500;
+                    CookieGame.goldCoins.setText("Coins: " + CookieGame.goldCoinCount);
+                   // autoClick1Setup();
+                   timer = new Timer(100, new ActionListener() {
+                    @Override 
+                    public void actionPerformed(ActionEvent e) {
+                        CookieGame.cookieClickerButton.doClick();
+                    }
+                   });
+
+                   timer.start();
+                } else {
+                    howMuchMoreCoins = 2500 - CookieGame.goldCoinCount;
+                    JOptionPane.showMessageDialog(frame, "Not enough gold coins! Sell cookies for more gold coins!! You need " + howMuchMoreCoins + " more coins to purchase this item!");
+                }
+
+            }
+        });
+    }
+
+    //Need to add item in shop double 1.5x sell 2.0x sell and so on.
+
+
+
+
 }
