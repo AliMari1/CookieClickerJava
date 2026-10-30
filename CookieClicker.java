@@ -11,7 +11,8 @@ public class CookieClicker {
 
     int cookieCount = 0;
     int goldCoinCount = 0;
-    public int clickPlus = 1;
+    public double clickPlus = 1;
+    
 
     // Image
     ImageIcon cookie = new ImageIcon("DaCookie.png");
@@ -29,15 +30,18 @@ public class CookieClicker {
 
     // Labels
     JLabel cookieLabel = new JLabel("Cookie Clicker");
-    JLabel points = new JLabel("Cookies: " + cookieCount);
+    JLabel points = new JLabel();
     JLabel gameOverScreen = new JLabel("You Beat The Game... Congrats!!!");
-    JLabel goldCoins = new JLabel("");
+    JLabel goldCoins = new JLabel();
     JLabel goldCoinIconLabel = new JLabel();
+
+    Image GCI = goldCoinImage.getImage();
+    Image scaledGCI = GCI.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
-        
+
     }
 
     public void setup() {
@@ -67,13 +71,34 @@ public class CookieClicker {
         shopOneScreen.autoClicker4();
         shopOneScreen.autoClicker5();
 
+        shopOneScreen.clickBoostOne();
+        shopOneScreen.clickBoostTwo();
+        shopOneScreen.clickBoostThree();
+        shopOneScreen.clickBoostFour();
+        shopOneScreen.clickBoostFive();
+
+        shopOneScreen.frenzyBuff();
+        shopOneScreen.megaBuff();
+        shopOneScreen.luckyBuff();
+        shopOneScreen.warpBuff();
+        shopOneScreen.rainBuff();
+
+        shopOneScreen.grandmaSpecial();
+        shopOneScreen.farmSpecial();
+        shopOneScreen.mineSpecial();
+        shopOneScreen.bankSpecial();
+        shopOneScreen.empireSpecial();
+
+
+        
+
         frame.setVisible(true);
 
     }
 
     public void setUpFrame() {
         frame.setTitle("Cookie Clicker Game");
-        frame.setSize(800, 800);
+        frame.setSize(1000, 800);
         frame.setLayout(null);
 
         // Cookie theme color
@@ -110,8 +135,7 @@ public class CookieClicker {
 
         continueGameButton.setBounds(300, 400, 200, 60);
 
-
-        // Brisket cooker game IDEA 
+        // Brisket cooker game IDEA
         // make cookie button invisible
         cookieClickerButton.setOpaque(false);
         cookieClickerButton.setContentAreaFilled(false);
@@ -131,21 +155,24 @@ public class CookieClicker {
         goldCoins.setBounds(620, 20, 150, 30);
 
         // GCI stands for gold coin image
-        Image GCI = goldCoinImage.getImage();
-        Image scaledImg = GCI.getScaledInstance(30,30, Image.SCALE_SMOOTH);
 
-        goldCoins.setIcon(new ImageIcon(scaledImg));
+        goldCoins.setIcon(new ImageIcon(scaledGCI));
         goldCoins.setText(" Coins: " + goldCoinCount);
 
         // DCI stands for DaCookie Image
         Image DCI = cookie.getImage();
-        Image cookieImg = DCI.getScaledInstance(300,300, Image.SCALE_SMOOTH);
+        Image cookieImg = DCI.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
 
         cookieClickerButton.setIcon(new ImageIcon(cookieImg));
+
+        Image cookieImgScore = DCI.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        points.setIcon(new ImageIcon(cookieImgScore));
 
         frame.add(cookieLabel);
         frame.add(points);
         frame.add(goldCoins);
+
+        points.setText(" Cookies: " + cookieCount);
     }
 
     public void updateCookies() {
@@ -154,9 +181,9 @@ public class CookieClicker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                cookieCount += clickPlus;
+                cookieCount += (int)Math.round(clickPlus);
 
-                points.setText("Cookies: " + cookieCount);
+                points.setText(" Cookies: " + cookieCount);
             }
         });
     }
@@ -169,7 +196,7 @@ public class CookieClicker {
                 if (cookieCount >= 1) {
                     goldCoinCount += cookieCount;
                     cookieCount = 0;
-                    points.setText("Cookies: " + cookieCount);
+                    points.setText(" Cookies: " + cookieCount);
                     goldCoins.setText(" Coins: " + goldCoinCount);
 
                 } else {
@@ -187,18 +214,81 @@ public class CookieClicker {
                 cookieCount = 0; // cookie count reset
                 goldCoinCount = 0; // gold coin count reset
                 clickPlus = 1;
-                points.setText("Cookies: " + cookieCount);
-                goldCoins.setText("Coins: " + goldCoinCount);
+                points.setText(" Cookies: " + cookieCount);
+                goldCoins.setText(" Coins: " + goldCoinCount);
                 // GAME RESET ANNOUNCEMENT IN FUTURE
-                shopOneScreen.plus2Button.setEnabled(true);
-                shopOneScreen.plus2Button.setText("+2 cookies ($10)");
+                Image scaledGCI = GCI.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+                shopOneScreen.plus2Button.setText("+2 ($10)");
+                shopOneScreen.plus5Button.setText("+5 ($50)");
+                shopOneScreen.plus10Button.setText("+10 ($100)");
+                shopOneScreen.plus20Button.setText("+20 ($300)");
+                shopOneScreen.plus50Button.setText("+50 ($500)");
+                // shopOneScreen.plus
+
+                goldCoins.setIcon(new ImageIcon(scaledGCI));
+                goldCoins.setText(" Coins: " + goldCoinCount);
 
                 if (shopOneScreen.timer != null) {
                     shopOneScreen.timer.stop();
                 }
 
+                shopOneScreen.auto1.setText("Auto 1  ($100)");
+                shopOneScreen.auto2.setText("Auto 2  ($500)");
+                shopOneScreen.auto3.setText("Auto 3  ($1K)");
+                shopOneScreen.auto4.setText("Auto 4  ($2.5K)");
+                shopOneScreen.auto5.setText("Auto 5  ($5K)");
+
                 shopOneScreen.auto1.setEnabled(true);
-                shopOneScreen.auto1.setText("Auto 1  ($100k)");
+                shopOneScreen.auto2.setEnabled(true);
+                shopOneScreen.auto3.setEnabled(true);
+                shopOneScreen.auto4.setEnabled(true);
+                shopOneScreen.auto5.setEnabled(true);
+
+                shopOneScreen.clickBoost1.setText("1.5x  ($2.5K)");
+                shopOneScreen.clickBoost1.setEnabled(true);
+
+                shopOneScreen.clickBoost2.setText("2x  ($3K)");
+                shopOneScreen.clickBoost2.setEnabled(true);
+
+                shopOneScreen.clickBoost3.setText("2.5x  ($5K)");
+                shopOneScreen.clickBoost3.setEnabled(true);
+
+                shopOneScreen.clickBoost4.setText("3x  ($7.5K)");
+                shopOneScreen.clickBoost4.setEnabled(true);
+
+                shopOneScreen.clickBoost5.setText("5x  ($10K)");
+                shopOneScreen.clickBoost5.setEnabled(true);
+
+                shopOneScreen.frenzy.setText("Frenzy  ($25K)");
+                shopOneScreen.frenzy.setEnabled(true);
+
+                shopOneScreen.mega.setText("Mega  ($50K)");
+                shopOneScreen.mega.setEnabled(true);
+
+                shopOneScreen.lucky.setText("Lucky  ($75K)");
+                shopOneScreen.lucky.setEnabled(true);
+
+                shopOneScreen.warp.setText("Warp  ($100K)");
+                shopOneScreen.warp.setEnabled(true);
+
+                shopOneScreen.rain.setText("Rain  ($150K)");
+                shopOneScreen.rain.setEnabled(true);
+
+                shopOneScreen.grandma.setText("Grandma  ($500K)");
+                shopOneScreen.grandma.setEnabled(true);
+
+                shopOneScreen.farm.setText("Farm  ($750K)");
+                shopOneScreen.farm.setEnabled(true);
+
+                shopOneScreen.mine.setText("Mine  ($1M)");
+                shopOneScreen.mine.setEnabled(true);
+
+                shopOneScreen.bank.setText("Bank  ($1.5M)");
+                shopOneScreen.bank.setEnabled(true);
+
+                shopOneScreen.empire.setText("Empire  ($2M)");
+                shopOneScreen.empire.setEnabled(true);
 
             }
         });
