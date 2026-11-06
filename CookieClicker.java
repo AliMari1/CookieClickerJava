@@ -18,9 +18,11 @@ public class CookieClicker {
     int goldCoinCount = 0;
     public double clickPlus = 1;
 
-    ImageIcon cookie = new ImageIcon("DaCookie.png");
-    ImageIcon goldCoinImage = new ImageIcon("GoldCoinImage.png");
+    ImageIcon cookie = new ImageIcon("CookieClickerJava/DaCookie.png");
+    ImageIcon goldCoinImage = new ImageIcon("CookieClickerJava/GoldCoinImage.png");
 
+
+    //JButton[] cookieButtons = {shopButton};
 
     JButton shopButton = new JButton("Shop #1");
     JButton pauseButton = new JButton("Pause");
@@ -51,6 +53,9 @@ public class CookieClicker {
     public void setup() {
 
         shopOneScreen = new CookieClickerShopOne(this);
+
+        //JButton[] mainButtons = {shopButton, pauseButton};
+
 
         shopOneScreen.frame = frame;
 
