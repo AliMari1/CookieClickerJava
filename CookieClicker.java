@@ -8,6 +8,14 @@ import java.util.Scanner;
 
 public class CookieClicker {
 
+    JButton[] cookieButtons;
+    JButton[] autoButtons;
+    JButton[] clickBoostButtons;
+    JButton[] buffButtons;
+    JButton[] specialButtons;
+
+    JLabel[] shopLabels;
+
     JFrame frame = new JFrame("Cookie Clicker Game");
 
     CookieClickerShopOne shopOneScreen;
@@ -18,11 +26,8 @@ public class CookieClicker {
     int goldCoinCount = 0;
     public double clickPlus = 1;
 
-    ImageIcon cookie = new ImageIcon("CookieClickerJava/DaCookie.png");
-    ImageIcon goldCoinImage = new ImageIcon("CookieClickerJava/GoldCoinImage.png");
-
-
-    //JButton[] cookieButtons = {shopButton};
+    ImageIcon cookie = new ImageIcon("DaCookie.png");
+    ImageIcon goldCoinImage = new ImageIcon("GoldCoinImage.png");
 
     JButton shopButton = new JButton("Shop #1");
     JButton pauseButton = new JButton("Pause");
@@ -34,6 +39,9 @@ public class CookieClicker {
     JButton autoClickerButton = new JButton("Auto Clicker");
     JButton saveButton = new JButton("Save");
     JButton loadButton = new JButton("Load");
+
+    JButton[] mainButtons = { shopButton, pauseButton, statsButton, cookieClickerButton,
+            restart, sell, continueGameButton, autoClickerButton, saveButton, loadButton };
 
     JLabel cookieLabel = new JLabel("Cookie Clicker");
     JLabel points = new JLabel();
@@ -47,17 +55,52 @@ public class CookieClicker {
     public static void main(String[] args) {
         CookieClicker cookieGame = new CookieClicker();
         cookieGame.setup();
+        
+    }
 
+    public void setButtonsVisible(JButton[] buttons, boolean visible) {
+        for (JButton button : buttons) {
+            button.setVisible(visible);
+        }
+    }
+
+    public void setLabelsVisible(JLabel[] labels, boolean visible) {
+        for (JLabel label : labels) {
+            label.setVisible(visible);
+        }
+    }
+
+    public void updateDisplay() {
+        points.setText(" Cookies: " + cookieCount);
+        goldCoins.setText(" Coins: " + goldCoinCount);
     }
 
     public void setup() {
 
         shopOneScreen = new CookieClickerShopOne(this);
 
-        //JButton[] mainButtons = {shopButton, pauseButton};
+        cookieButtons = new JButton[] { shopOneScreen.plus2Button, shopOneScreen.plus5Button,
+                shopOneScreen.plus10Button,
+                shopOneScreen.plus20Button, shopOneScreen.plus50Button };
 
+        autoButtons = new JButton[] { shopOneScreen.auto1, shopOneScreen.auto2,
+                shopOneScreen.auto3, shopOneScreen.auto4, shopOneScreen.auto5 };
+
+        clickBoostButtons = new JButton[] { shopOneScreen.clickBoost1, shopOneScreen.clickBoost2,
+                shopOneScreen.clickBoost3, shopOneScreen.clickBoost4, shopOneScreen.clickBoost5 };
+
+        buffButtons = new JButton[] { shopOneScreen.frenzy, shopOneScreen.mega,
+                shopOneScreen.lucky, shopOneScreen.warp, shopOneScreen.rain };
+
+        specialButtons = new JButton[] { shopOneScreen.grandma, shopOneScreen.farm,
+                shopOneScreen.mine, shopOneScreen.bank, shopOneScreen.empire };
+
+        shopLabels = new JLabel[] { shopOneScreen.moreCookiesLabel, shopOneScreen.autoLabel,
+                shopOneScreen.boostLabel, shopOneScreen.buffLabel, shopOneScreen.specialLabel
+        };
 
         shopOneScreen.frame = frame;
+
 
         setUpFrame();
         shopOneScreen.setUpShopButtons();
@@ -97,48 +140,33 @@ public class CookieClicker {
         shopOneScreen.empireSpecial();
 
         setUpButtons();
+
         setUpLabels();
 
         saveGame();
+
         loadGame();
+
         autoClickerOffAndOn();
+
         pauseGame();
         cookieLabel.setVisible(false);
+
         updateCookies();
+
         updateGoldCoins();
+
         resetGame();
+
         shopOne();
         shopOneScreen.back();
 
-        shopOneScreen.plus2Button.setVisible(false);
-        shopOneScreen.plus5Button.setVisible(false);
-        shopOneScreen.plus10Button.setVisible(false);
-        shopOneScreen.plus20Button.setVisible(false);
-        shopOneScreen.plus50Button.setVisible(false);
-
-        shopOneScreen.auto1.setVisible(false);
-        shopOneScreen.auto2.setVisible(false);
-        shopOneScreen.auto3.setVisible(false);
-        shopOneScreen.auto4.setVisible(false);
-        shopOneScreen.auto5.setVisible(false);
-
-        shopOneScreen.clickBoost1.setVisible(false);
-        shopOneScreen.clickBoost2.setVisible(false);
-        shopOneScreen.clickBoost3.setVisible(false);
-        shopOneScreen.clickBoost4.setVisible(false);
-        shopOneScreen.clickBoost5.setVisible(false);
-
-        shopOneScreen.frenzy.setVisible(false);
-        shopOneScreen.mega.setVisible(false);
-        shopOneScreen.lucky.setVisible(false);
-        shopOneScreen.warp.setVisible(false);
-        shopOneScreen.rain.setVisible(false);
-
-        shopOneScreen.grandma.setVisible(false);
-        shopOneScreen.farm.setVisible(false);
-        shopOneScreen.mine.setVisible(false);
-        shopOneScreen.bank.setVisible(false);
-        shopOneScreen.empire.setVisible(false);
+        setButtonsVisible(mainButtons, true);
+        setButtonsVisible(cookieButtons, false);
+        setButtonsVisible(autoButtons, false);
+        setButtonsVisible(clickBoostButtons, false);
+        setButtonsVisible(buffButtons, false);
+        setButtonsVisible(specialButtons, false);
 
         shopOneScreen.moreCookiesLabel.setVisible(false);
         shopOneScreen.autoLabel.setVisible(false);
@@ -266,8 +294,7 @@ public class CookieClicker {
                 if (cookieCount >= 1) {
                     goldCoinCount += cookieCount;
                     cookieCount = 0;
-                    points.setText(" Cookies: " + cookieCount);
-                    goldCoins.setText(" Coins: " + goldCoinCount);
+                    updateDisplay();
 
                 } else {
                     JOptionPane.showMessageDialog(frame, "Not enough cookies to sell! Get more cookies");
@@ -284,8 +311,7 @@ public class CookieClicker {
                 cookieCount = 0;
                 goldCoinCount = 0;
                 clickPlus = 1;
-                points.setText(" Cookies: " + cookieCount);
-                goldCoins.setText(" Coins: " + goldCoinCount);
+                updateDisplay();
 
                 Image scaledGCI = GCI.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -389,52 +415,16 @@ public class CookieClicker {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                cookieClickerButton.setVisible(false);
-                shopButton.setVisible(false);
-                statsButton.setVisible(false);
-                sell.setVisible(false);
-                autoClickerButton.setVisible(false);
-                pauseButton.setVisible(false);
-                restart.setVisible(false);
+                setButtonsVisible(mainButtons, false);
+                setButtonsVisible(cookieButtons, true);
+                setButtonsVisible(autoButtons, true);
+                setButtonsVisible(clickBoostButtons, true);
+                setButtonsVisible(buffButtons, true);
+                setButtonsVisible(specialButtons, true);
+
                 cookieLabel.setVisible(true);
 
-                saveButton.setVisible(false);
-                loadButton.setVisible(false);
-
                 // Show Multiplier Buttons
-                shopOneScreen.plus2Button.setVisible(true);
-                shopOneScreen.plus5Button.setVisible(true);
-                shopOneScreen.plus10Button.setVisible(true);
-                shopOneScreen.plus20Button.setVisible(true);
-                shopOneScreen.plus50Button.setVisible(true);
-
-                // Show Auto Clickers
-                shopOneScreen.auto1.setVisible(true);
-                shopOneScreen.auto2.setVisible(true);
-                shopOneScreen.auto3.setVisible(true);
-                shopOneScreen.auto4.setVisible(true);
-                shopOneScreen.auto5.setVisible(true);
-
-                // Show Click Boosts
-                shopOneScreen.clickBoost1.setVisible(true);
-                shopOneScreen.clickBoost2.setVisible(true);
-                shopOneScreen.clickBoost3.setVisible(true);
-                shopOneScreen.clickBoost4.setVisible(true);
-                shopOneScreen.clickBoost5.setVisible(true);
-
-                // Show Buffs
-                shopOneScreen.frenzy.setVisible(true);
-                shopOneScreen.mega.setVisible(true);
-                shopOneScreen.lucky.setVisible(true);
-                shopOneScreen.warp.setVisible(true);
-                shopOneScreen.rain.setVisible(true);
-
-                // Show Specials
-                shopOneScreen.grandma.setVisible(true);
-                shopOneScreen.farm.setVisible(true);
-                shopOneScreen.mine.setVisible(true);
-                shopOneScreen.bank.setVisible(true);
-                shopOneScreen.empire.setVisible(true);
 
                 // Show Labels
                 shopOneScreen.moreCookiesLabel.setVisible(true);
@@ -805,16 +795,14 @@ public class CookieClicker {
                             goldCoinCount += 100;
                             cookieCount += 5000;
 
-                            goldCoins.setText(" Coins: " + goldCoinCount);
-                            points.setText(" Cookies: " + cookieCount);
+                            updateDisplay();
 
                         });
 
                         empireTimer.start();
                     }
 
-                    points.setText(" Cookies: " + cookieCount);
-                    goldCoins.setText(" Coins: " + goldCoinCount);
+                    updateDisplay();
 
                     JOptionPane.showMessageDialog(frame, "Game Loaded!");
 
