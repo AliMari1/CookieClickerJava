@@ -1,0 +1,15 @@
+This is a fully functional Cookie Clicker Game with lots of features like...
+  - extra cookies per click
+  - auto clickers with extra cookies per auto click
+  - cookie multipliers
+  - rebirths / prestige // soon to be added
+  - pause button // in progress
+  - play time // soon to be added
+  - restart game
+  - sell cookies for gold coins
+  - shop one and two // in progress
+  - powerups one time use // soon to be added
+  - you can check your game stats // soon to be added
+  - you have a settings menu // soon to be added
+  - you can enable music advanced graphics or disable them // soon to be added
+  - save game and load game features // soon to be added
